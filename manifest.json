@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "VS Code Trigger Extension",
+  "version": "0.1",
+  "description": "Membuka VSCode supaya kalian rajin ngoding.", // Tambahkan deskripsi
+  "permissions": [
+    "tabs",
+    "notifications",
+    "scripting" // Diperlukan jika Anda inject script secara dinamis, atau bisa dihapus jika pakai content_scripts statis
+   ],
+  "host_permissions": [
+    "*://*.facebook.com/*" 
+  ],
+  "action": {
+    // "default_popup": "popup.html", // Hapus jika tidak ada popup, atau pastikan file ada
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*"], // Targetkan hanya halaman Facebook
+      "js": ["content.js"], // Nama file content script Anda
+      "run_at": "document_start" // Jalankan setelah DOM siap
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
